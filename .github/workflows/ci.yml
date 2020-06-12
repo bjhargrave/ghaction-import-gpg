@@ -31,8 +31,8 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            core.setOutput('pgp', fs.readFileSync('.github/test-key.pgp', {encoding: 'utf8'}));
-            core.setOutput('passphrase', fs.readFileSync('.github/test-key.pass', {encoding: 'utf8'}));
+            core.setOutput('pgp', fs.readFileSync('test-key.pgp', {encoding: 'utf8'}));
+            core.setOutput('passphrase', fs.readFileSync('test-key.pass', {encoding: 'utf8'}));
       -
         name: Import GPG
         id: import_gpg
@@ -43,8 +43,8 @@ jobs:
           git_tag_gpgsign: true
           git_push_gpgsign: true
         env:
-          GPG_PRIVATE_KEY: ${{ steps.test.outputs.pgp }}
-          PASSPHRASE: ${{ steps.test.outputs.passphrase }}
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
       -
         name: GPG user IDs
         run: |
@@ -71,8 +71,8 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            core.setOutput('pgp-base64', fs.readFileSync('.github/test-key-base64.pgp', {encoding: 'utf8'}));
-            core.setOutput('passphrase', fs.readFileSync('.github/test-key.pass', {encoding: 'utf8'}));
+            core.setOutput('pgp-base64', fs.readFileSync('test-key-base64.pgp', {encoding: 'utf8'}));
+            core.setOutput('passphrase', fs.readFileSync('test-key.pass', {encoding: 'utf8'}));
       -
         name: Import GPG
         id: import_gpg

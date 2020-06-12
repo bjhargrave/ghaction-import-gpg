@@ -2,23 +2,23 @@ import * as fs from 'fs';
 import * as gpg from '../src/gpg';
 
 const userInfo = {
-  pgp: fs.readFileSync('.github/test-key.pgp', {
+  pgp: fs.readFileSync('test-key.pgp', {
     encoding: 'utf8',
     flag: 'r'
   }),
-  pgp_base64: fs.readFileSync('.github/test-key-base64.pgp', {
+  pgp_base64: fs.readFileSync('test-key-base64.pgp', {
     encoding: 'utf8',
     flag: 'r'
   }),
-  passphrase: fs.readFileSync('.github/test-key.pass', {
+  passphrase: fs.readFileSync('test-key.pass', {
     encoding: 'utf8',
     flag: 'r'
   }),
-  name: 'Joe Tester',
-  email: 'joe@foo.bar',
-  keyID: 'D523BD50DD70B0BA',
-  fingerprint: '27571A53B86AF0C799B38BA77D851EB72D73BDA0',
-  keygrip: '3E2D1142AA59E08E16B7E2C64BA6DDC773B1A627'
+  name: 'Test Passphrase',
+  email: 'testpassphrase@bjhargrave.com',
+  keyID: 'DB1AD6BC2682797E',
+  fingerprint: '747B0C511438B441F40CF54ADB1AD6BC2682797E',
+  keygrip: '8DBF9B129CB24B66E12639153681FE26AF5E0E6B'
 };
 
 describe('gpg', () => {
