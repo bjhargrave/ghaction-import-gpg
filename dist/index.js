@@ -1085,7 +1085,8 @@ function run() {
                 core.info('📌 Getting keygrip');
                 const keygrip = yield gpg.getKeygrip(privateKey.fingerprint);
                 core.debug(`${keygrip}`);
-                core.info('🔓 Presetting passphrase');
+                core.info('🔓 Presetting passphrase!!');
+                core.debug(`passphrase.length    : ${process.env.PASSPHRASE.length}`);
                 yield gpg.presetPassphrase(keygrip, process.env.PASSPHRASE).then(stdout => {
                     core.debug(stdout);
                 });
@@ -1191,6 +1192,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.killAgent = exports.deleteKey = exports.presetPassphrase = exports.configureAgent = exports.getKeygrip = exports.importKey = exports.getDirs = exports.getVersion = exports.agentConfig = void 0;
+const core = __importStar(__webpack_require__(470));
 const fs = __importStar(__webpack_require__(747));
 const path = __importStar(__webpack_require__(622));
 const os = __importStar(__webpack_require__(87));
@@ -1320,7 +1322,10 @@ exports.configureAgent = (config) => __awaiter(void 0, void 0, void 0, function*
     yield gpgConnectAgent('RELOADAGENT');
 });
 exports.presetPassphrase = (keygrip, passphrase) => __awaiter(void 0, void 0, void 0, function* () {
+    core.info(`passphrase.length    : ${passphrase.length}`);
     const hexPassphrase = Buffer.from(passphrase, 'utf8').toString('hex').toUpperCase();
+    core.info(`hexPassphrase.length    : ${hexPassphrase.length}`);
+    core.info(`PRESET_PASSPHRASE ${keygrip} -1 ${hexPassphrase}`);
     yield gpgConnectAgent(`PRESET_PASSPHRASE ${keygrip} -1 ${hexPassphrase}`);
     return yield gpgConnectAgent(`KEYINFO ${keygrip}`);
 });
