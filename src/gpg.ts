@@ -1,3 +1,4 @@
+import * as core from '@actions/core';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
@@ -149,7 +150,10 @@ export const configureAgent = async (config: string): Promise<void> => {
 };
 
 export const presetPassphrase = async (keygrip: string, passphrase: string): Promise<string> => {
+  core.info(`passphrase.length    : ${passphrase.length}`);
   const hexPassphrase: string = Buffer.from(passphrase, 'utf8').toString('hex').toUpperCase();
+  core.info(`hexPassphrase.length    : ${hexPassphrase.length}`);
+  core.info(`PRESET_PASSPHRASE ${keygrip} -1 ${hexPassphrase}`);
   await gpgConnectAgent(`PRESET_PASSPHRASE ${keygrip} -1 ${hexPassphrase}`);
   return await gpgConnectAgent(`KEYINFO ${keygrip}`);
 };

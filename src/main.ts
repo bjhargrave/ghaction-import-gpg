@@ -48,7 +48,8 @@ async function run(): Promise<void> {
       const keygrip = await gpg.getKeygrip(privateKey.fingerprint);
       core.debug(`${keygrip}`);
 
-      core.info('🔓 Presetting passphrase');
+      core.info('🔓 Presetting passphrase!!');
+      core.debug(`passphrase.length    : ${process.env.PASSPHRASE.length}`);
       await gpg.presetPassphrase(keygrip, process.env.PASSPHRASE).then(stdout => {
         core.debug(stdout);
       });
